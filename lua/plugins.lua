@@ -112,5 +112,14 @@ return {
 		})
 	end,
 	},
-	{"xiyaowong/transparent.nvim"}
+	{"xiyaowong/transparent.nvim"},
+	{
+		'nvim-lualine/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+	},
+	{
+		"stevearc/conform.nvim",
+		opts = {}
+	}
+
 }
