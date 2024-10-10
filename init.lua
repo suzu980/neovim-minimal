@@ -20,7 +20,7 @@ vim.opt.autoindent = true
 vim.opt.mouse = "a"
 vim.opt.fillchars = { eob = " " }
 
--- Lazy
+-- Lazy plugin manager
 require("config.lazy")
 
 -- Basic Keymaps
@@ -33,13 +33,19 @@ vim.keymap.set("x", "<leader>p", '"_dP') -- best remap
 -- color scheme
 vim.cmd([[colorscheme catppuccin-latte]])
 
+-- Nvim Tree
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+vim.opt.termguicolors = true
+require("nvim-tree").setup()
+
 -- Commander
 local commander = require("commander")
 commander.add({
 	{
 		desc = "Show Commander",
 		cmd = "<CMD>Telescope commander<CR>",
-		keys = { "n", "<leader>f", { silent = true } },
+		keys = { "n", "<leader>fc", { silent = true } },
 	},
 	{
 		desc = "Find in files",
@@ -62,8 +68,13 @@ commander.add({
 		keys = { "n", "<leader>fh", { silent = true } },
 	},
 	{
-		desc = "Oil",
-		cmd = "<CMD>Oil<CR>",
+		desc = "Format File",
+		cmd = "<CMD>:lua require('conform').format()<CR>",
+		keys = { "n", "<leader>fo", { silent = true } },
+	},
+	{
+		desc = "File Tree",
+		cmd = "<CMD>NvimTreeToggle<CR>",
 		keys = { "n", "<C-n>", { silent = true } },
 	},
 })
@@ -131,8 +142,6 @@ require("conform").setup({
 		typescript = { "prettierd", "prettier", stop_after_first = true },
 	},
 })
--- Map a key to format the buffer
-vim.api.nvim_set_keymap("n", "<leader>fo", ":lua require('conform').format()<CR>", { noremap = true, silent = true })
 
 require("lspconfig").ts_ls.setup({
 	on_attach = on_attach,
