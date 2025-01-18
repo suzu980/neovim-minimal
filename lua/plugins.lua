@@ -124,4 +124,12 @@ return {
 	{
 		"nvim-tree/nvim-tree.lua",
 	},
+	{
+		"windwp/nvim-autopairs",
+		event = "InsertEnter",
+		config = true,
+	},
+	{
+		"windwp/nvim-ts-autotag",
+	},
 }

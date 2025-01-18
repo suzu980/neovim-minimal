@@ -31,7 +31,7 @@ vim.keymap.set("n", "ss", ":split<Return><C-w>w", { silent = true }) -- Split
 vim.keymap.set("x", "<leader>p", '"_dP') -- best remap
 
 -- color scheme
-vim.cmd([[colorscheme catppuccin-latte]])
+vim.cmd([[colorscheme catppuccin-mocha]])
 
 -- Nvim Tree
 vim.g.loaded_netrw = 1
@@ -86,7 +86,7 @@ mason.setup()
 -- Mason-lspconfig
 local masonlspconfig = require("mason-lspconfig")
 masonlspconfig.setup({
-	ensure_installed = { "lua_ls", "ts_ls", "tailwindcss", "clangd", "html" },
+	ensure_installed = { "lua_ls", "ts_ls", "tailwindcss", "clangd", "html", "pyright" },
 })
 
 -- lspconfig
@@ -140,6 +140,16 @@ require("conform").setup({
 		lua = { "stylua" },
 		javascript = { "prettierd", "prettier", stop_after_first = true },
 		typescript = { "prettierd", "prettier", stop_after_first = true },
+		javascriptreact = { "prettierd", "prettier", stop_after_first = true },
+		typescriptreact = { "prettierd", "prettier", stop_after_first = true },
+		html = { "prettierd", "prettier", stop_after_first = true },
+		css = { "prettierd", "prettier", stop_after_first = true },
+		json = { "prettierd", "prettier", stop_after_first = true },
+		python = { "black" },
+	},
+	format_on_save = {
+		timeout_ms = 500,
+		lsp_format = "fallback",
 	},
 })
 
@@ -159,10 +169,33 @@ require("lspconfig").clangd.setup({
 	on_attach = on_attach,
 	capabilities = capabilities,
 })
+require("lspconfig").pyright.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+})
+
+-- auto html tags
+require("nvim-ts-autotag").setup({
+	opts = {
+		-- Defaults
+		enable_close = true, -- Auto close tags
+		enable_rename = false, -- Auto rename pairs of tags
+		enable_close_on_slash = true, -- Auto close on trailing </
+	},
+	-- Also override individual filetype configs, these take priority.
+	-- Empty by default, useful if one of the "opts" global settings
+	-- doesn't work well in a specific filetype
+	--
+	-- per_filetype = {
+	--   ["html"] = {
+	--     enable_close = false
+	--   }
+	-- }
+})
 
 -- lua line
 require("lualine").setup({
-	options = { theme = "ayu_light" },
+	options = { theme = "ayu_dark" },
 })
 
 -- startup commands
