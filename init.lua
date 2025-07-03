@@ -91,7 +91,7 @@ vim.keymap.set("n", "ss", ":split<Return><C-w>w", { silent = true }) -- Split
 vim.keymap.set("x", "<leader>p", '"_dP') -- best remap
 
 -- color scheme
-vim.cmd([[colorscheme catppuccin-mocha]])
+--vim.cmd([[colorscheme catppuccin-mocha]])
 
 -- Nvim Tree
 vim.g.loaded_netrw = 1
@@ -182,4 +182,4 @@ require("lualine").setup({
 })
 
 -- startup commands
-vim.cmd("TransparentEnable")
+--vim.cmd("TransparentEnable")
